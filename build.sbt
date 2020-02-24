@@ -10,6 +10,11 @@ scalaVersion := "2.13.1"
 libraryDependencies += guice
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "5.0.0" % Test
 
+libraryDependencies += "mysql" % "mysql-connector-java" % "8.0.12"
+// libraryDependencies += "com.h2database" % "h2" % "1.4.197"
+libraryDependencies += evolutions
+libraryDependencies += jdbc
+
 // Adds additional packages into Twirl
 //TwirlKeys.templateImports += "com.tuyano.play.controllers._"
 
