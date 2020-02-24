@@ -93,4 +93,37 @@ class HomeController @Inject()(db: Database, cc: MessagesControllerComponents) e
     }
     Redirect(routes.HomeController.index)
   }
+
+  def delete(id:Int) = Action{implicit request =>
+    var pdata:Data = null;
+      try{
+        db.withConnection{conn =>
+          val stmt = conn.createStatement
+          val rs = stmt.executeQuery("select * from people where id=" + id)
+          rs.next
+          val name = rs.getString("name")
+          val mail = rs.getString("mail")
+          val tel = rs.getString("tel")
+          pdata = Data(name, mail, tel)
+        }
+      }catch{
+        case e:SQLException =>
+          Redirect(routes.HomeController.index)
+      }
+      Ok(views.html.delete("このレコードを削除します。", pdata, id))
+  }
+
+  def remove(id:Int) = Action{implicit request =>
+    try
+      db.withConnection{conn =>
+        val ps = conn.prepareStatement("delete from people where id=?")
+        ps.setInt(1, id)
+        ps.executeUpdate
+      }
+    catch{
+      case e: SQLException =>
+        Redirect(routes.HomeController.index)
+    }
+    Redirect(routes.HomeController.index)
+  }
 }
