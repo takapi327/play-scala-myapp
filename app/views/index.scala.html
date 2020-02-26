@@ -1,5 +1,10 @@
-@(message:String)
+@(message:String, result:List[String])
 
 @main("Index Page", "Hello", "copyright 2018."){
   <p>@Html(message)</p>
+  <ul>
+    @for(item <- result){
+      <li>@item</li>
+    }
+  </ul>
 }
