@@ -31,7 +31,7 @@ class HomeController @Inject()(repository: PersonRepository, cc: MessagesControl
           Future.successful(Ok(views.html.add("error.", errorForm)))
         }, person => {
           repository.create(person.name, person.mail, person.tel).map { _ =>
-            Redirect(routes.HomeController.index)
+            Redirect(routes.HomeController.index).flashing("success"->"エンティティを作成しました！")
           }
         }
       )
