@@ -51,5 +51,9 @@ class PersonRepository @Inject()
     )
   }
 
+  def find(s:String):Future[Seq[Person]] = db.run{
+    people.filter(_.name === s).result
+  }
+
   private val people = TableQuery[PeopleTable]
 }
