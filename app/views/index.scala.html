@@ -1,10 +1,10 @@
-@(message:String, result:List[PersonForm.PersonData])
+@(message:String, data:Seq[models.Person])(implicit request: MessagesRequestHeader)
 
 @main("Index Page", "Hello", "copyright 2018."){
   <p>@Html(message)</p>
   <ul>
-    @for(item <- result){
-      <li>@item.name: @item.mail: (@item.tel)</li>
+    @for(item <- data){
+      <li>@item.id: @item.name [@item.mail, @item.tel]</li>
     }
   </ul>
 }

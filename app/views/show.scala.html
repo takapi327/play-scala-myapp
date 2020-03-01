@@ -1,11 +1,11 @@
-@(message:String, item:PersonForm.PersonData)
+@(message:String, person:Person)
 
-@main("Index Page", "Hello", "copyright 2018."){
-  <p>@Html(message)</p>
+@main("Show Person", "Show", "copyright 2018."){
+  <p>@message</p>
   <ul>
-    <li>ID: @item.id</li>
-    <li>NAME: @item.name</li>
-    <li>MAIL: @item.mail</li>
-    <li>TEL: @item.tel</li>
+    <li>ID: @person.id</li>
+    <li>NAME: @person.name</li>
+    <li>MAIL: @person.mail</li>
+    <li>TEL: @person.tel</li>
   </ul>
 }

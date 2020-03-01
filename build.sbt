@@ -11,8 +11,8 @@ libraryDependencies += guice
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "5.0.0" % Test
 
 libraryDependencies += "mysql" % "mysql-connector-java" % "8.0.12"
-libraryDependencies += "com.typesafe.play" %% "play-slick" % "3.0.3"
-libraryDependencies += "com.typesafe.play" %% "play-slick-evolutions" % "3.0.3"
+libraryDependencies += "com.typesafe.play" %% "play-slick" % "5.0.0"
+libraryDependencies += "com.typesafe.play" %% "play-slick-evolutions" % "5.0.0"
 // libraryDependencies += evolutions
 // libraryDependencies += jdbc
 // libraryDependencies += "org.playframework.anorm" %% "anorm" %  "2.6.4"
