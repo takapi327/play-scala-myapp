@@ -2,6 +2,7 @@ package controllers
 
 import javax.inject._
 
+import javax.inject._
 import models._
 import play.api.data.Form
 import play.api.data.Forms._
@@ -12,7 +13,7 @@ import play.api.mvc._
 import scala.concurrent.{ ExecutionContext, Future }
 
 @Singleton
-class HomeController @Inject()(repository: PersonRepository, cc: MessagesControllerComponents)(implicit ec: ExecutionContext)
+class HomeController @Inject()(repository: PersonRepository, repository2: MessageRepository, cc: MessagesControllerComponents)(implicit ec: ExecutionContext)
   extends MessagesAbstractController(cc){
 
     def index() = Action.async {implicit request =>
@@ -87,5 +88,23 @@ class HomeController @Inject()(repository: PersonRepository, cc: MessagesControl
             Ok(views.html.find("Find:" + find.find, Person.personFind, result))
           }
         })
+    }
+
+    def message() = Action.async { implicit request => 
+      repository2.listMsgWithP().map { messages =>
+        Ok(views.html.message("Message List.", Message.messageForm, messages))
+      }
+    }
+
+    def addmessage() = Action.async { implicit request =>
+      Message.messageForm.bindFromRequest.fold(errorForm => {
+        repository2.listMsgWithP().map {messages =>
+          Ok(views.html.message("ERROR.", errorForm, messages))
+        }
+      },message => {
+        repository2.createMsg(message.personId, message.message).map {_ =>
+          Redirect(routes.HomeController.message).flashing("success"->"エンティティを作成しました！")
+        }
+      })
     }
   }
