@@ -4,7 +4,11 @@
   <p>@flash.get("success").getOrElse(message)</p>
   <ul>
     @for(item <- data){
-      <li>@item.id: @item.name [@item.mail, @item.tel]</li>
+      <li><a href="/show/@item.id">@item.id: @item.name [@item.mail, @item.tel]</a></li>
+      <!-- <a href="/edit/$id">@item.id: @item.name [@item.mail, @item.tel]</a> -->
+      <!-- <a href="/show/@item.id">詳細</a> -->
+      <a href="/delete/@item.id">削除</a>
     }
   </ul>
+  <a href="/add">追加</a>
 }
